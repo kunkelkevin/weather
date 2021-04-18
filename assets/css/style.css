@@ -1,0 +1,33 @@
+header {
+  background-color: blue;
+  color: aliceblue;
+  background-image: linear-gradient(to right, blue, darkblue);
+  padding: 12px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.city-search {
+  text-align: center;
+}
+
+form {
+  padding: 2px 0 12px;
+  border-bottom: solid blue 1px;
+}
+.city-input {
+  height: 36px;
+  margin: 5px 0;
+}
+
+.todays-weather {
+  margin: 6px auto;
+  border: solid 1px gray;
+}
+
+.weather-day {
+  background-color: darkblue;
+  color: aliceblue;
+  margin: 0 2px 5px;
+  padding-top: 6px;
+}

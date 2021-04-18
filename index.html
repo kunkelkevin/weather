@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="Description" content="Enter your description here" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <title>Weather Dashboard</title>
+  </head>
+  <body>
+    <header><h1>Weather Dashboard</h1></header>
+    <main class="container">
+      <div class="row">
+        <div class="col-4">
+          <h2 class="city-search">Search for a City:</h2>
+          <form id="city-form">
+            <input
+              name="city"
+              id="city"
+              type="text"
+              autofocus="true"
+              class="input-group col-12 city-input"
+            />
+            <button type="submit" class="btn btn-primary col-12">Search</button>
+          </form>
+          <div class="col-12 searched-cities"></div>
+        </div>
+        <div class="col-8">
+          <div class="row todays-weather">
+            <h2 class="col-12 city-display">
+              PlaceHolder <span class="weather-symbol"></span>
+            </h2>
+            <p class="col-12">Temp: <span class="temp"></span></p>
+            <p class="col-12">Wind: <span class="wind"></span></p>
+            <p class="col-12">Humidity: <span class="humidity"></span></p>
+            <p class="col-12">UV Index: <span class="uv"></span></p>
+          </div>
+          <div class="row 5day">
+            <h3 class="col-12">5-Day Forecast</h3>
+            <div class="weather-days"></div>
+            <section class="col weather-day">
+              <p class="day-n">placeholder day</p>
+              <span class="weather-symbol"></span>
+              <p>Temp: <span></span></p>
+              <p>Wind: <span class="wind"></span></p>
+              <p>Humidity: <span class="humidity"></span></p>
+            </section>
+            <section class="col weather-day">
+              <p class="day-n">placeholder day</p>
+              <span class="weather-symbol"></span>
+              <p>Temp: <span></span></p>
+              <p>Wind: <span class="wind"></span></p>
+              <p>Humidity: <span class="humidity"></span></p>
+            </section>
+            <section class="col weather-day">
+              <p class="day-n">placeholder day</p>
+              <span class="weather-symbol"></span>
+              <p>Temp: <span></span></p>
+              <p>Wind: <span class="wind"></span></p>
+              <p>Humidity: <span class="humidity"></span></p>
+            </section>
+            <section class="col weather-day">
+              <p class="day-n">placeholder day</p>
+              <span class="weather-symbol"></span>
+              <p>Temp: <span></span></p>
+              <p>Wind: <span class="wind"></span></p>
+              <p>Humidity: <span class="humidity"></span></p>
+            </section>
+            <section class="col weather-day">
+              <p class="day-n">placeholder day</p>
+              <span class="weather-symbol"></span>
+              <p>Temp: <span></span></p>
+              <p>Wind: <span class="wind"></span></p>
+              <p>Humidity: <span class="humidity"></span></p>
+            </section>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+    <script src="./assets/js/script.js"></script>
+  </body>
+</html>
