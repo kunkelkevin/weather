@@ -20,6 +20,10 @@ form {
   margin: 5px 0;
 }
 
+.city-display{
+  padding: 8px 5px 5px 15px;
+}
+
 .todays-weather {
   margin: 6px auto;
   border: solid 1px gray;
@@ -30,4 +34,8 @@ form {
   color: aliceblue;
   margin: 0 2px 5px;
   padding-top: 6px;
+}
+
+.icon{
+  height: 60px;
 }
