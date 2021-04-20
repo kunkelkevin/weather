@@ -39,3 +39,7 @@ form {
 .icon{
   height: 60px;
 }
+
+.searched-list{
+  margin: 5px;
+}
