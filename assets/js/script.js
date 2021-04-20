@@ -5,6 +5,9 @@ var humidityEl = document.querySelector(".humidity");
 var uvEl = document.querySelector(".uv");
 var iconEl = document.querySelector(".icon");
 var forecastEl = document.querySelector(".weather-days");
+var cityFormEl = document.querySelector("#city-form");
+var searchedCitiesEl = document.querySelector("#searched-cities");
+var cityNameEl = document.getElementById("city");
 
 var currentDisplay = function (data) {
   console.log(data);
@@ -20,6 +23,7 @@ var currentDisplay = function (data) {
 
 var forecastDisplay = function (data) {
   console.log(data);
+  forecastEl.textContent = "";
   var uvIndex = data.current.uvi;
   uvEl.textContent = uvIndex;
   console.log(uvEl.className);
@@ -67,14 +71,16 @@ var forecastDisplay = function (data) {
   }
 };
 
-var getWeather = function () {
+var getWeather = function (city) {
   var apiUrl =
-    "https://api.openweathermap.org/data/2.5/weather?q=Austin&units=imperial&appid=1a4b53ff8d8ec9391998ec0c0478d866";
+    "https://api.openweathermap.org/data/2.5/weather?q=" +
+    city +
+    "&units=imperial&appid=1a4b53ff8d8ec9391998ec0c0478d866";
   fetch(apiUrl).then(function (response) {
     if (response.ok) {
       response.json().then(function (data) {
         currentDisplay(data);
-        getForecast();
+        getForecast(data.coord.lon, data.coord.lat);
       });
     } else {
       alert("Error: " + response.statusText);
@@ -82,9 +88,14 @@ var getWeather = function () {
   });
 };
 
-var getForecast = function () {
+var getForecast = function (lon, lat) {
+  console.log(lon, lat);
   var apiUrl =
-    "https://api.openweathermap.org/data/2.5/onecall?lon=-97.7431&lat=30.2672&units=imperial&appid=1a4b53ff8d8ec9391998ec0c0478d866";
+    "https://api.openweathermap.org/data/2.5/onecall?lon=" +
+    lon +
+    "&lat=" +
+    lat +
+    "&units=imperial&appid=1a4b53ff8d8ec9391998ec0c0478d866";
   fetch(apiUrl).then(function (response) {
     if (response.ok) {
       response.json().then(function (data) {
@@ -96,4 +107,10 @@ var getForecast = function () {
   });
 };
 
-getWeather();
+var formSubmitHandler = function (event) {
+  event.preventDefault();
+  var cityName = cityNameEl.value.trim();
+  getWeather(cityName);
+};
+getWeather("austin");
+cityFormEl.addEventListener("submit", formSubmitHandler);
