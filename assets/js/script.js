@@ -79,6 +79,8 @@ var forecastDisplay = function (data) {
     forecastEl.appendChild(dayblockEl);
   }
 };
+
+// Displays the previously searched list with last searched on top
 var searchListDisplay = function(){
     searchedCitiesEl.textContent = "";
     for (var i = cityList.length-1; i>=0; i--){
@@ -89,6 +91,8 @@ var searchListDisplay = function(){
       searchedCitiesEl.appendChild(searchItemEl);
     }
 }
+
+// Adds searched cities to city list with a check to see if city is already in list and caps it at 10
 var searchedCities = function(city){
     for (var i = 0; i < cityList.length; i++){
         if (city === cityList[i]){
@@ -153,6 +157,7 @@ var formSubmitHandler = function (event) {
   cityNameEl.value = "";
 };
 
+// Button click on previously searched.  Displays weather for that city and reorders search list.
 var searchListHandler = function (event){
     event.preventDefault();
     var cityName = event.target.getAttribute("data-city");
@@ -163,6 +168,7 @@ var searchListHandler = function (event){
     }
 }
 
+// Load cityList array from local storage, display the previously searched list and display weather from last city searched or Austin if no data from local storage.
 var loadCities = function (){
     var citiesSearched = localStorage.getItem("cities");
     if (!citiesSearched){
