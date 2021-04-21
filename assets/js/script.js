@@ -15,7 +15,7 @@ var initial = false;
 // Displays the current weather conditions
 var currentDisplay = function (data) {
   console.log(data);
-  cityEl.textContent = data.name + moment().format(" (MM/DD/YYYY)");
+  cityEl.textContent = data.name + moment().add(data.timezone+60*5*60,"seconds").format(" (MM/DD/YYYY  hh:mm)");
   tempEl.innerHTML = data.main.temp + " &deg;F";
   windEl.textContent = data.wind.speed + " MPH";
   humidityEl.textContent = data.main.humidity + "%";
