@@ -15,7 +15,11 @@ var initial = false;
 // Displays the current weather conditions
 var currentDisplay = function (data) {
   console.log(data);
-  cityEl.textContent = data.name + moment().add(data.timezone+60*5*60,"seconds").format(" (MM/DD/YYYY  hh:mm)");
+  cityEl.textContent =
+    data.name +
+    moment()
+      .add(data.timezone + 60 * 5 * 60, "seconds")
+      .format(" (MM/DD/YYYY)");
   tempEl.innerHTML = data.main.temp + " &deg;F";
   windEl.textContent = data.wind.speed + " MPH";
   humidityEl.textContent = data.main.humidity + "%";
@@ -26,21 +30,21 @@ var currentDisplay = function (data) {
 };
 
 // Displays the current UV Index and changes color based on value
-var uvDisplay = function(data){
-    var uvIndex = data.current.uvi;
-    uvEl.textContent = uvIndex;
-    uvEl.classList = "btn-danger";
-    if (uvIndex <= 3) {
-      uvEl.classList.remove();
-      uvEl.classList = "btn btn-success";
-    } else if (uvIndex <= 5) {
-      uvEl.classList.remove();
-      uvEl.classList = "btn btn-warning";
-    } else {
-      uvEl.classList.remove();
-      uvEl.classList = "btn btn-danger";
-    }
-}
+var uvDisplay = function (data) {
+  var uvIndex = data.current.uvi;
+  uvEl.textContent = uvIndex;
+  uvEl.classList = "btn-danger";
+  if (uvIndex <= 3) {
+    uvEl.classList.remove();
+    uvEl.classList = "btn btn-success";
+  } else if (uvIndex <= 5) {
+    uvEl.classList.remove();
+    uvEl.classList = "btn btn-warning";
+  } else {
+    uvEl.classList.remove();
+    uvEl.classList = "btn btn-danger";
+  }
+};
 
 //Displays the next 5 days of weather data
 var forecastDisplay = function (data) {
@@ -81,32 +85,32 @@ var forecastDisplay = function (data) {
 };
 
 // Displays the previously searched list with last searched on top
-var searchListDisplay = function(){
-    searchedCitiesEl.textContent = "";
-    for (var i = cityList.length-1; i>=0; i--){
-      var searchItemEl = document.createElement("button");
-      searchItemEl.classList = "col-12 btn btn-secondary searched-list"
-      searchItemEl.textContent = cityList[i];
-      searchItemEl.setAttribute("data-city", cityList[i]);
-      searchedCitiesEl.appendChild(searchItemEl);
-    }
-}
+var searchListDisplay = function () {
+  searchedCitiesEl.textContent = "";
+  for (var i = cityList.length - 1; i >= 0; i--) {
+    var searchItemEl = document.createElement("button");
+    searchItemEl.classList = "col-12 btn btn-secondary searched-list";
+    searchItemEl.textContent = cityList[i];
+    searchItemEl.setAttribute("data-city", cityList[i]);
+    searchedCitiesEl.appendChild(searchItemEl);
+  }
+};
 
 // Adds searched cities to city list with a check to see if city is already in list and caps it at 10
-var searchedCities = function(city){
-    for (var i = 0; i < cityList.length; i++){
-        if (city === cityList[i]){
-            cityList.splice(i,1);
-        }
+var searchedCities = function (city) {
+  for (var i = 0; i < cityList.length; i++) {
+    if (city === cityList[i]) {
+      cityList.splice(i, 1);
     }
-    if (cityList.length>= 10){
-        cityList.splice(0,1);
-    }
+  }
+  if (cityList.length >= 10) {
+    cityList.splice(0, 1);
+  }
   cityList.push(city);
   searchListDisplay();
-  localStorage.setItem("cities",JSON.stringify(cityList));
+  localStorage.setItem("cities", JSON.stringify(cityList));
   console.log(cityList);
-}
+};
 
 // Pulls data from Open Weather Map and calls all the display functions
 var getWeather = function (city) {
@@ -117,9 +121,9 @@ var getWeather = function (city) {
   fetch(apiUrl).then(function (response) {
     if (response.ok) {
       response.json().then(function (data) {
-          if (initial){
+        if (initial) {
           searchedCities(data.name);
-          };
+        }
         currentDisplay(data);
         getForecast(data.coord.lon, data.coord.lat);
       });
@@ -158,27 +162,27 @@ var formSubmitHandler = function (event) {
 };
 
 // Button click on previously searched.  Displays weather for that city and reorders search list.
-var searchListHandler = function (event){
-    event.preventDefault();
-    var cityName = event.target.getAttribute("data-city");
-    console.log(cityName);
-    if (cityName){
-        getWeather(cityName);
-        searchedCities(cityName);
-    }
-}
+var searchListHandler = function (event) {
+  event.preventDefault();
+  var cityName = event.target.getAttribute("data-city");
+  console.log(cityName);
+  if (cityName) {
+    getWeather(cityName);
+    searchedCities(cityName);
+  }
+};
 
 // Load cityList array from local storage, display the previously searched list and display weather from last city searched or Austin if no data from local storage.
-var loadCities = function (){
-    var citiesSearched = localStorage.getItem("cities");
-    if (!citiesSearched){
-        getWeather("austin");
-        return false;
-    }
-    cityList = JSON.parse(citiesSearched);
-    searchListDisplay();
-    getWeather(cityList[cityList.length-1]);
-}
+var loadCities = function () {
+  var citiesSearched = localStorage.getItem("cities");
+  if (!citiesSearched) {
+    getWeather("austin");
+    return false;
+  }
+  cityList = JSON.parse(citiesSearched);
+  searchListDisplay();
+  getWeather(cityList[cityList.length - 1]);
+};
 
 loadCities();
 cityFormEl.addEventListener("submit", formSubmitHandler);
